@@ -1,0 +1,24 @@
+repos:
+  # pre-commit - built-in hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-yaml # - This hook checks yaml files for parseable syntax.
+        args:
+          - --allow-multiple-documents
+          - --unsafe # - Unsafe yaml loading for custom tags e.g. !ENV
+      - id: check-added-large-files # - Prevent giant files from being committed
+      - id: check-case-conflict # - Check for files that would conflict in case-insensitive filesystems
+      - id: check-executables-have-shebangs # - Ensures that (non-binary) executables have a shebang.
+        files: .\.sh$
+      - id: check-merge-conflict # - Check for files that contain merge conflict strings.
+      - id: end-of-file-fixer # - Ensures that a file is either empty, or ends with one newline.
+      - id: trailing-whitespace # - Ensures there are no trailing whitespaces in files.
+  # pre-commit-terraform - This hook validates the terraform code.
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.86.0
+    hooks:
+      - id: terraform_fmt # - Formats TF Code for consistent styling
+      - id: terraform_validate # - Checks for syntax errors in TF Code
+        args:
+          - --hook-config=--retry-once-with-cleanup=true

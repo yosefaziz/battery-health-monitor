@@ -1,0 +1,80 @@
+{
+	"name": "Battery Health Monitor",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+
+	"features": {
+		"ghcr.io/devcontainers/features/terraform:1": {},
+		"ghcr.io/devcontainers-contrib/features/pre-commit:2": {}
+	},
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"amazonwebservices.aws-toolkit-vscode",
+				"esbenp.prettier-vscode",
+				"gruntfuggly.todo-tree",
+				"mechatroner.rainbow-csv",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-azuretools.vscode-docker",
+				"njpwerner.autodocstring",
+				"njqdev.vscode-python-typehint",
+				"oderwat.indent-rainbow",
+				"redhat.vscode-yaml",
+				"usernamehw.errorlens"
+			],
+			"settings": {
+				"autoDocstring.docstringFormat": "google",
+				"dev.containers.copyGitConfig": true,
+				"editor.formatOnPaste": false,
+				"editor.formatOnType": false,
+				"editor.formatOnSave": false,
+				"files.eol": "\n",
+				"files.encoding": "utf8",
+				"git.mergeEditor": true,
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.formatting.provider": "yapf",
+				"python.languageServer": "Pylance",
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": true,
+				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
+				"python.testing.pytestPath": "/usr/local/py-utils/bin/pytest",
+				"python.testing.pytestEnabled": true,
+				"pythonTestExplorer.testFramework": "pytest",
+				"todo-tree.general.tags": [
+					"FIXME",
+					"TODO"
+				],
+				"todo-tree.highlights.useColourScheme": true,
+
+				// language specific settings
+				"[json]": {
+					"editor.formatOnSave": true,
+					"editor.quickSuggestions": {
+						"strings": true
+					}
+				},
+				"[python]": {
+					"editor.formatOnSave": true,
+					"editor.formatOnType": true,
+					"editor.indentSize": "tabSize",
+					"editor.tabSize": 4
+				},
+				"[yaml]": {
+					"editor.autoIndent": "keep",
+					"editor.formatOnSave": true,
+					"editor.insertSpaces": true,
+					"editor.tabSize": 2,
+					"editor.quickSuggestions": {
+						"other": true,
+						"comments": false,
+						"strings": true
+					}
+				}
+			}
+		}
+	},
+
+	"postStartCommand": "sh .devcontainer/post_start.sh"
+}
