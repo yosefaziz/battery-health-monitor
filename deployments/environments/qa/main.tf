@@ -11,7 +11,7 @@ terraform {
   backend "s3" {
     bucket = "tf-battery-health-monitor"
     key    = "infra.tfstate"
-    region = var.aws_region
+    region = "eu-central-1"
   }
 }
 
