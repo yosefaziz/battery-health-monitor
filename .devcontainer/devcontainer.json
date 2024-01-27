@@ -19,7 +19,6 @@
 				"ms-azuretools.vscode-docker",
 				"njpwerner.autodocstring",
 				"njqdev.vscode-python-typehint",
-				"oderwat.indent-rainbow",
 				"redhat.vscode-yaml",
 				"usernamehw.errorlens"
 			],
@@ -71,6 +70,10 @@
 						"comments": false,
 						"strings": true
 					}
+				},
+				"[tf]": {
+					"editor.autoIndent": "keep",
+					"editor.tabSize": 2
 				}
 			}
 		}

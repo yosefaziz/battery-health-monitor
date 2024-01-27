@@ -21,7 +21,7 @@ pre-commit-update:
 # terraform deployment
 terraform-check: terraform-fmt terraform-validate
 
-terraform-run-lambda: terraform-init-dev terraform-plan-dev terraform-apply-dev
+terraform-run-dev: terraform-init-dev terraform-plan-dev terraform-apply-dev
 
 terraform-init-dev:
 	terraform -chdir=./deployments/environments/dev init
@@ -33,7 +33,7 @@ terraform-apply-dev:
 	terraform -chdir=./deployments/environments/dev apply
 
 terraform-fmt:
-	terraform fmt
+	terraform fmt -recursive
 
 terraform-validate:
 	terraform validate
