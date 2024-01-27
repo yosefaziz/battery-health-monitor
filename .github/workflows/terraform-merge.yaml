@@ -1,0 +1,98 @@
+name: Deploy Terraform Infrastructure
+
+on:
+  push:
+    branches:
+      - qa
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  TF_LOG: INFO
+
+jobs:
+  deploy_to_qa:
+    env:
+      TF_QA_DIRECTORY: -chdir=deployments/environments/qa
+
+    if: github.ref == 'refs/heads/qa'
+    name: Deploy to QA
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: AWS Credentials Config
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_QA_GITHUB_ACTIONS }}
+        aws-region: eu-central-1
+
+    - name: Terraform Setup
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.7.1
+
+    - name: Terraform fmt
+      run: terraform fmt -check -recursive
+
+    - name: Terraform Init
+      run:  terraform ${{ env.TF_QA_DIRECTORY }} init
+
+    - name: Terraform Validate
+      run: terraform ${{ env.TF_QA_DIRECTORY }} validate -no-color
+
+    - name: Terraform Plan
+      run: terraform ${{ env.TF_QA_DIRECTORY }} plan
+
+    - name: Terraform Plan Status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+
+    - name: Terraform Apply
+      run: terraform ${{ env.TF_QA_DIRECTORY }} apply -auto-approve -input=false
+
+  deploy_to_prod:
+    env:
+      TF_PROD_DIRECTORY: -chdir=deployments/environments/prod
+
+    if: github.ref == 'refs/heads/main'
+    name: Deploy to Prod
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: AWS Credentials Config
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_PROD_GITHUB_ACTIONS }}
+        aws-region: eu-central-1
+
+    - name: Terraform Setup
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.7.1
+
+    - name: Terraform fmt
+      run: terraform fmt -check -recursive
+
+    - name: Terraform Init
+      run:  terraform ${{ env.TF_PROD_DIRECTORY }} init
+
+    - name: Terraform Validate
+      run: terraform ${{ env.TF_PROD_DIRECTORY }} validate -no-color
+
+    - name: Terraform Plan
+      run: terraform ${{ env.TF_PROD_DIRECTORY }} plan
+
+    - name: Terraform Plan Status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+
+    - name: Terraform Apply
+      run: terraform ${{ env.TF_PROD_DIRECTORY }} apply -auto-approve -input=false
