@@ -44,13 +44,13 @@ jobs:
       run: terraform fmt -check -recursive
 
     - name: Terraform Init
-      run:  terraform ${{ TF_QA_DIRECTORY }} init
+      run:  terraform ${{ env.TF_QA_DIRECTORY }} init
 
     - name: Terraform Validate
-      run: terraform ${{ TF_QA_DIRECTORY }} validate -no-color
+      run: terraform ${{ env.TF_QA_DIRECTORY }} validate -no-color
 
     - name: Terraform Plan
-      run: terraform ${{ TF_QA_DIRECTORY }} plan
+      run: terraform ${{ env.TF_QA_DIRECTORY }} plan
 
     - name: Terraform Plan Status
       if: steps.plan.outcome == 'failure'
