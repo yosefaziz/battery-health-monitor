@@ -5,6 +5,7 @@ on:
     branches:
       - qa
       - main
+      - prototype
 
 permissions:
   id-token: write
