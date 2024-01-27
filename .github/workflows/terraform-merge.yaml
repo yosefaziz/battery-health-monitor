@@ -57,7 +57,7 @@ jobs:
       run: exit 1
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve -input=false
+      run: terraform ${{ env.TF_QA_DIRECTORY }} apply -auto-approve -input=false
 
   # deploy_to_prod:
   #   env:
