@@ -9,8 +9,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "tf-backend"
-    key    = "qa/terraform.tfstate"
+    bucket = "tf-battery-health-monitor"
+    key    = "infra.tfstate"
     region = var.aws_region
   }
 }
