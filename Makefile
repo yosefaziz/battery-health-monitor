@@ -1,5 +1,4 @@
 # pre-commit tasks
-
 pre-commit-all: ## execute all pre-commit hooks
 	pre-commit run --all-files
 
@@ -37,3 +36,7 @@ terraform-fmt:
 
 terraform-validate:
 	terraform validate
+
+# python tests
+test-battery-health-monitor:
+	python deployments/modules/aws/lambda/python/test_battery_health_monitor.py
