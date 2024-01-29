@@ -35,6 +35,7 @@ jobs:
       with:
         message: |
           ![Alt text](https://i.pinimg.com/1200x/13/ff/49/13ff49773ca9c25ac2116c8bc6c4d2ee.jpg)
-          Tests outcome: ${{ steps.tests.outcome }}
-          Pylint outcome: ${{ steps.pylint.outcome }}
+
+          Unit Tests: ${{ steps.tests.outcome }}
+          Pylint: ${{ steps.pylint.outcome }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
