@@ -4,10 +4,17 @@ This project enables seamless monitoring of battery health by sending, receiving
 
 ![alt text](./diagrams/lambda-architecture.drawio.png)
 
+## Table of Contents
+1. [Usage](#usage)
+2. [Directory Structure](#directory-structure)
+3. [Prerequisites](#prerequisites)
+4. [Local Development in VSCode](#local-development-in-vscode)
+5. [Deployment](#deployment)
+
 ## Usage
 
 To use this script, you need to pass an event to the main function. The event should be a dictionary with the following structure:
-```
+```json
 {
     "device": string,
     "payload": string
@@ -17,7 +24,7 @@ To use this script, you need to pass an event to the main function. The event sh
 The device is a string that represents the name of the device. The payload is a hexadecimal string that represents the payload from the device.
 
 The main function will decode the payload and print the decoded data in the following format:
-```
+```json
 {
     "device": string,
     "time": integer,
@@ -55,7 +62,7 @@ The main function will decode the payload and print the decoded data in the foll
 ## Local Development in VSCode
 
 ### VSCode Setup
-We use Dev Containers to ensure that all users have the same VSCode settings. All additional extensions should be added into the `devcontainer.json` in a separate PR.
+We use Dev Containers to ensure that all users have the same VSCode settings. All additional extensions should be added into the [`devcontainer.json`](./.devcontainer/devcontainer.json) in a separate PR.
 1. Open the Repo folder in VSCode
 2. Ctrl+Shift+P and type in "Dev Containers: Reopen in Container"
 
@@ -65,7 +72,7 @@ We use Dev Containers to ensure that all users have the same VSCode settings. Al
 3. Ctrl+Shift+P and type in "AWS: Show or Hide Regions" and choose your respective region
 
 ### Development
-Everything should be ready to run. In `./Makefile` you can find shortcuts for frequently used commands.
+Everything should be ready to run. In [`Makefile`](./Makefile) you can find shortcuts for frequently used commands.
 - To run terraform locally, enter `make terraform-run-dev`
 - To run the unit tests for the Lambda function, enter `make test-battery-health-monitor`
 
