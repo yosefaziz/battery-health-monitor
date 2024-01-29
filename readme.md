@@ -27,6 +27,25 @@ The main function will decode the payload and print the decoded data in the foll
 }
 ```
 
+## Directory Structure
+
+```
+├── .devcontainer           <- Setup for local VSCode Development
+├── .github
+│   └── workflows           <- CI/CD Pipelines
+├── deployments
+│   ├── environments        <- CD Setup for Dev (Testing), QA (Pre-Production) and Prod Environments on AWS
+│   │   ├── dev
+│   │   ├── prod
+│   │   └── qa
+│   └── modules             <- Terraform Modules
+│       └── aws             <- Amazon Web Services
+│           ├── iam         <- AWS Identity and Access Management
+│           └── lambda      <- AWS Lambda Functions
+│               └── python  <- Python Code for Lambda Functions
+└── diagrams                <- Readme Diagrams
+```
+
 ## Prerequisites
 
 - Access to a test environment on AWS
