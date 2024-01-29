@@ -29,7 +29,7 @@ jobs:
         pylint deployments/modules/aws/lambda/python/ --fail-under=10
 
     - name: Comment PR
-      uses: thollander/actions-comment-pull-request@master
+      uses: thollander/actions-comment-pull-request@v2
       with:
         message: |
           ![Alt text](https://i.pinimg.com/1200x/13/ff/49/13ff49773ca9c25ac2116c8bc6c4d2ee.jpg)
