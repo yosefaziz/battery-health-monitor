@@ -22,3 +22,11 @@ repos:
       - id: terraform_validate # - Checks for syntax errors in TF Code
         args:
           - --hook-config=--retry-once-with-cleanup=true
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args: ["--rcfile=pylintrc"]
